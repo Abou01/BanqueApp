@@ -1,3 +1,56 @@
 page-home {
+  .main-content{
+    width: 100%;
+    height: 100%;
 
+    background-image: linear-gradient(90deg, rgb(18, 36, 241), rgb(137, 141, 241));
+  }
+
+  .main-menu{
+    display:block;
+    margin-right: 10%;
+    margin-top : 30%;
+  }
+
+  .main-menu ul, .main-menu li{
+    list-style-type: none;
+  }
+
+  li.virement{
+    opacity: 0.9 !important;
+  }
+
+  .main-menu li{
+    display: block;
+    width: 50%;
+    float: left;
+    text-align: center;
+    opacity: 0.5;
+    margin-bottom: 15%;
+  }
+
+  .main-menu li .menu-icon{
+    font-size: 60px;
+    color:white;
+    display: block;
+    width: 100%;
+  }
+
+
+  .main-menu span{
+    width: 100%;
+    color: #f1f1f1;
+    font-family: "Karla";
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-size: 16px;
+  }
+
+  .menu-title{
+    font-family: 'Lobster', cursive;
+    font-size: 34px;
+    color: #e4e4e4;
+    text-align: center;
+  }
 }

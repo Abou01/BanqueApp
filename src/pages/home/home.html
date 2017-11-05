@@ -1,14 +1,19 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content class="main-content">
+  <h1 class="menu-title">BankApp</h1>
+  <div class="main-menu">
+    <ul>
+      <li class="virement">
+        <a (click)="OnVirementClick()" >
+          <ion-icon class="menu-icon" name="md-swap"></ion-icon>
+          <span>Mes Virements</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="OnChatClick()" >
+          <ion-icon class="menu-icon" name="md-chatboxes"></ion-icon>
+          <span>Chat</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 </ion-content>

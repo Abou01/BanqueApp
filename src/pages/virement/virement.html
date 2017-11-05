@@ -1,0 +1,47 @@
+<!--
+  Generated template for the VirementPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <bank-navbar></bank-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <div class="filtre">
+        <ion-item>
+            <ion-label><ion-icon name="ios-funnel-outline" item-start></ion-icon>Filtre :</ion-label>
+            <ion-select #filtre multiple="false" (ionChange)="onFilterChange(filtre.value)">
+                <ion-option value="Positif">Positif</ion-option>
+                <ion-option value="Négatif">Négatif</ion-option>
+                <ion-option value="All">Tous</ion-option>
+            </ion-select>
+        </ion-item>
+
+    </div>
+    <ion-list no-lines>
+        <ion-item *ngFor="let vir of tab" [ngClass]="{'green':vir.somme > 0,'red':vir.somme < 0}">
+            <ion-icon name="ios-arrow-up-outline" item-start> <!-- addPipe for icon -->
+            </ion-icon>
+            <h2>{{vir.intitule}}</h2>
+            <h3>{{vir.somme}} €</h3>
+            <ion-note item-end>{{vir.date | date: 'dd/MM/yyyy'}}</ion-note>
+        </ion-item>
+    </ion-list>
+
+    <button (click)="OnAddVirementClick()" ion-button icon-only clear style="float: right;border: 3px rgb(137, 141, 241) solid;border-radius: 20px;">
+        <ion-icon name="md-add" color="persoTheme"></ion-icon>
+    </button>
+  <!--<table>-->
+
+      <!--<tr *ngFor="let transac of tab" [ngClass]="{'green':transac.isCredit(),'red':!transac.isCredit()}">-->
+      <!--<td (click)="oula(transac.intitule)">{{transac.intitule}}</td>-->
+      <!--<td>{{transac.somme}}</td>-->
+      <!--<td>{{transac.description}}</td>-->
+      <!--<td>{{transac.date}}</td>-->
+      <!--<td style="background-color:white;"><img style="width:10px;" [src]="transac.somme | picto"></td>-->
+    <!--</tr>-->
+  <!--</table>-->
+</ion-content>
