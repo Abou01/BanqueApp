@@ -45,6 +45,13 @@
 
   </ion-list>
 
+  <select [(ngModel)]="newVir.destinataire" name="destinataire">
+  <option *ngFor="let beneficiaire of beneficiaires" 
+  [ngValue]="beneficiaire._id"   
+  [attr.selected]="newVir.destinataire.username==beneficiaire.username ? true : null">
+    {{beneficiaire.username}}
+  </option></select>
+
   <button ion-button  type="submit" block>Ajouter</button>
   </form>
 </ion-content>

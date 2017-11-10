@@ -10,12 +10,18 @@
 
 
 <ion-content padding>
+    <div>
+        <input id="toggle-on" class="toggle toggle-left" name="toggle" value="present" type="radio" checked (change)="onChangeView($event)" />
+        <label for="toggle-on" class="btn">Compte</label>
+        <input id="toggle-off" class="toggle toggle-right" name="toggle" value="futur" type="radio" (change)="onChangeView($event)" />
+        <label for="toggle-off" class="btn">Prélèvement à venir</label>
+    </div>
     <div class="filtre">
         <ion-item>
             <ion-label><ion-icon name="ios-funnel-outline" item-start></ion-icon>Filtre :</ion-label>
             <ion-select #filtre multiple="false" (ionChange)="onFilterChange(filtre.value)">
-                <ion-option value="Positif">Positif</ion-option>
-                <ion-option value="Négatif">Négatif</ion-option>
+                <ion-option value="Positif">Virement</ion-option>
+                <ion-option value="Négatif">Prélèvement</ion-option>
                 <ion-option value="All">Tous</ion-option>
             </ion-select>
         </ion-item>
@@ -23,8 +29,8 @@
     </div>
     <ion-list no-lines>
         <ion-item *ngFor="let vir of tab" [ngClass]="{'green':vir.somme > 0,'red':vir.somme < 0}">
-            <ion-icon name="ios-arrow-up-outline" item-start> <!-- addPipe for icon -->
-            </ion-icon>
+            <ion-icon *ngIf="vir.somme < 0" name="ios-arrow-down-outline" item-start></ion-icon>
+            <ion-icon *ngIf="vir.somme > 0" name="ios-arrow-up-outline" item-start></ion-icon>
             <h2>{{vir.intitule}}</h2>
             <h3>{{vir.somme}} €</h3>
             <ion-note item-end>{{vir.date | date: 'dd/MM/yyyy'}}</ion-note>

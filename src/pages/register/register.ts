@@ -22,6 +22,7 @@ export class RegisterPage {
   hasError: boolean;
   errorMessage: string;
   isConfirm:any;
+  loading:any;
 
   constructor(
     private navCtrl: NavController,
@@ -47,10 +48,7 @@ export class RegisterPage {
     }
     else{
 
-      const loading = this.loadingCtrl.create({
-        content: 'Enregistrement...'
-      });
-      loading.present();
+      this.showLoader('Enregistrement...');
 
       let details = {
         nom: this.form.value.nom,
@@ -61,14 +59,24 @@ export class RegisterPage {
       };
 
       this.auth.createAccount(details).then(() => {
-        loading.dismiss();
+        this.loading.dismiss();
         this.navCtrl.pop();
       }, (error) => {
-        loading.dismiss();
+        this.loading.dismiss();
         this.errorMessage = error;
         this.hasError = true;
       });
     }
+
+  }
+
+  showLoader(message:string){
+    
+    this.loading = this.loadingCtrl.create({
+      content: message
+    });
+
+    this.loading.present();
 
   }
   

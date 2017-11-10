@@ -19,7 +19,8 @@ export class AddVirementPage {
     date:'',
     intitule:'',
     somme:'',
-    description:''
+    description:'',
+    destinataire:''
   };
 
   loading:any;
@@ -27,16 +28,22 @@ export class AddVirementPage {
   hasError: boolean;
   errorMessage: string;
   isVirementAuto:Boolean;
+  beneficiaires;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public api: ApiProvider, private loadingCtrl: LoadingController) {
     this.newVir.date = new Date().toISOString();
     this.isVirementAuto = false;
     this.hasError = false;
+    this.api.getUsers().then((data) => {
+      this.beneficiaires = data;
+      this.newVir.destinataire = this.beneficiaires[0];
+    }, (err) => {
+        console.log(JSON.stringify(err));
+    });
   }
 
   OnAddNewVir(form) {
-    //TODO
-    // Verification somme isNumber
+    
     console.log(JSON.stringify(this.newVir));
 
     this.showLoader('Enregistrement...');
@@ -48,16 +55,25 @@ export class AddVirementPage {
       this.hasError = true;
       this.errorMessage = "Veuillez saisir un nombre pour la somme du virement !";
       this.loading.dismiss();
-    }else{
-      this.api.addVirements(this.newVir)
-      .then(() => {
-        this.loading.dismiss();
-        this.navCtrl.pop();
-      }, (error) => {
-        this.loading.dismiss();
-        this.errorMessage = JSON.stringify(error);
+    }
+    else{
+      if(Number(this.newVir.somme)<1){
+        console.log("is Neg-");
         this.hasError = true;
-      });
+        this.errorMessage = "Veuillez saisir un nombre positif !";
+        this.loading.dismiss();}
+      else
+      {
+        this.api.addVirements(this.newVir)
+        .then(() => {
+          this.loading.dismiss();
+          this.navCtrl.pop();
+        }, (error) => {
+          this.loading.dismiss();
+          this.errorMessage = JSON.stringify(error);
+          this.hasError = true;
+        });
+      }
     }
   }
 

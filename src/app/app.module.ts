@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import {HttpModule} from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -14,6 +15,10 @@ import { ApiProvider } from '../providers/api/api';
 import { AddVirementPage } from '../pages/add-virement/add-virement';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
+import { JoinChatPage } from '../pages/join-chat/join-chat';
+import { ChatRoomPage } from '../pages/chat-room/chat-room';
+const config: SocketIoConfig = { url: 'http://127.0.0.1:3000', options: {} };
+
 
 @NgModule({
   declarations: [
@@ -23,13 +28,16 @@ import { RegisterPage } from '../pages/register/register';
     AddVirementPage,
     LoginPage,
     RegisterPage,
-    BankNavbarComponent
+    BankNavbarComponent,
+    JoinChatPage,
+    ChatRoomPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -38,7 +46,9 @@ import { RegisterPage } from '../pages/register/register';
     VirementPage,
     LoginPage,
     AddVirementPage,
-    RegisterPage
+    RegisterPage,
+    JoinChatPage,
+    ChatRoomPage
   ],
   providers: [
     StatusBar,

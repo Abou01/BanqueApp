@@ -38,6 +38,25 @@ export class ApiProvider {
         });
     }
 
+    public getUsers(){
+        // return this.http.get(this.apiUrl+"/virements")
+        //     .map(res => res.json()).subscribe();
+        
+        return new Promise((resolve, reject) => {
+            
+            let headers = new Headers();
+            headers.append('authorization', this.token);
+    
+            this.http.get(this.apiUrl+"users", {headers: headers})
+            .map(res => res.json())
+            .subscribe(data => {
+                resolve(data);
+            }, (err) => {
+                reject(err);
+            });
+        });
+    }
+
     public addVirements(virement){
         return new Promise((resolve, reject) => {
             
@@ -99,8 +118,7 @@ export class ApiProvider {
                 .subscribe(res => {
 
                 let data = res.json();
-                this.token = data.token;
-                this.storage.set('token', data.token);
+                console.log(data.success)
                 resolve(data);
 
                 }, (err) => {
